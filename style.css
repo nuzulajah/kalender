@@ -1,0 +1,99 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CALENDAR CONTAINER */
+.calendar {
+  width: max-content;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* MONTH YEAR */
+.month-year {
+  color: white;
+  font-size: 24px;
+}
+
+/* BUTTON */
+.calendar-header button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #334155;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+.calendar-header button:hover {
+  background: #00adb5;
+  transform: scale(1.1);
+}
+
+/* DAYS NAME */
+.days-name {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 15px;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+/* DAYS */
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+/* DAY */
+.day {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #334155;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.day:hover {
+  background: #00adb5;
+  transform: translateY(-3px);
+}
+
+/* ACTIVE DAY */
+.active {
+  background: #00adb5;
+  font-weight: bold;
+}
