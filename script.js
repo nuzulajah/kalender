@@ -1,5 +1,8 @@
 // ELEMENT
 const monthYear = document.querySelector(".month-year");
+const monthYearPicker = document.querySelector(".month-year-picker");
+const monthSelect = document.querySelector(".month-select");
+const yearSelect = document.querySelector(".year-select");
 const daysContainer = document.querySelector(".days");
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
@@ -40,6 +43,22 @@ function Clock() {
   clockDate.textContent = `${day}, ${month}, ${year}`;
 }
 
+// POPULATE MONTH AND YEAR PICKER
+monthNames.forEach((monthName, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = monthName;
+  monthSelect.appendChild(option);
+});
+
+const currentYear = new Date().getFullYear();
+for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+  const option = document.createElement("option");
+  option.value = year;
+  option.textContent = year;
+  yearSelect.appendChild(option);
+}
+
 // FUNCTION RENDER CALENDAR
 function renderCalendar() {
 
@@ -48,7 +67,9 @@ function renderCalendar() {
   const month = date.getMonth();
 
   // Tampilkan bulan dan tahun
-  monthYear.innerHTML = `${monthNames[month]} ${year}`;
+  monthYear.textContent = `${monthNames[month]} ${year}`;
+  monthSelect.value = month;
+  yearSelect.value = year;
 
   // Hari pertama bulan
   const firstDay = new Date(year, month, 1).getDay();
@@ -103,6 +124,32 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar();
+});
+
+monthYear.addEventListener("click", () => {
+  monthYearPicker.classList.toggle("show");
+});
+
+monthYearPicker.addEventListener("click", (event) => {
+  event.stopPropagation();
+});
+
+monthSelect.addEventListener("change", () => {
+  date.setMonth(Number(monthSelect.value));
+  renderCalendar();
+  monthYearPicker.classList.remove("show");
+});
+
+yearSelect.addEventListener("change", () => {
+  date.setFullYear(Number(yearSelect.value));
+  renderCalendar();
+  monthYearPicker.classList.remove("show");
+});
+
+document.addEventListener("click", (event) => {
+  if (!monthYearPicker.contains(event.target) && event.target !== monthYear) {
+    monthYearPicker.classList.remove("show");
+  }
 });
 
 // PERTAMA KALI JALAN
